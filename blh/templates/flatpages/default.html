@@ -1,0 +1,27 @@
+{% extends "header.html" %}
+{% block headtitle %}BIG LARGE HUGE: {{ flatpage.title }}{% endblock %}
+{% load static from staticfiles %}
+{% block page-styles %}{% endblock %}
+{% block content %}
+<div id="reviews">
+	<section class="main-title-wrap">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>{{ flatpage.title }}</h1>
+				</div>
+			</div>
+		</div>
+	</section>	
+	
+	<section class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span8">
+					{{ flatpage.content }}
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{% endblock %}

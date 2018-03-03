@@ -1,0 +1,16 @@
+<script type="text/javascript">
+			$(document).ready(function() {
+				var aboveHeight = $('header').outerHeight();	
+		        $(window).scroll(function(){
+	 
+	                if ($(window).scrollTop() > aboveHeight){
+
+	                $('nav').addClass('fixed').css('top','0');
+	 
+	                } else {
+
+	                $('nav').removeClass('fixed');
+	                }
+	        });
+        });
+		</script>

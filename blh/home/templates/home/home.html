@@ -1,0 +1,363 @@
+{% extends "header.html" %}
+{% block content %}
+		
+<section id="hero" class="featured-hero">
+	<figure class="cover">
+		<img src="{{ STATIC_URL}}img/broadcast-wrap.jpg" alt="Big Large Huge" />
+	 	<figcaption>Art by <a href="http://thebasementmonster.com" target="_blank">Daniel J. O'Brien</a></figcaption>
+	</figure>
+</section>
+<section id="blh-content" class="">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<header>
+					<h2>The non-gaming, gaming website</h2>
+					<h3>It makes sense when you say it out loud</h3>
+					<!-- <p>Dive right in and enjoy some quality audio and writings!</p> -->
+				</header>
+			</div>
+		</div>
+		
+		<div class="row">
+		  <div class="col-lg-12">
+		    <h4>The BroadCast</h4>
+		  </div>	
+			<!-- content block -->
+			{% for bc in bclist %}
+			{% if forloop.counter0 == 0 %}
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="mod-content">
+					<a href="/the-broadcast/{{bc.slug}}">
+						<div class="content" style="background-image:url(media/{{bc.cover}});">
+							<header class="content-info">
+								<span>
+									<h6>The BroadCast</h6>
+									<h4>EPISODE {{bc.episode}}</h4>
+								</span>
+							</header>
+							<span class="overlay"></span>
+						</div>
+					</a>
+				</div>
+			</div>			
+			{% else %}
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="mod-content">
+					<a href="/the-broadcast/{{bc.slug}}">
+						<div class="content" style="background-image:url(media/{{bc.cover}});">
+							<header class="content-info">
+								<span>
+									<h6>The BroadCast</h6>
+									<h4>EPISODE {{bc.episode}}</h4>
+								</span>
+							</header>
+							<span class="overlay"></span>
+						</div>
+					</a>
+				</div>
+			</div>
+			{% endif %}
+			{% endfor %}
+		</div>
+		<br>
+		<div class="row">
+		  <div class="col-lg-12">
+		    <h4>Great moments in gaming</h4>
+		  </div>	
+			{% for gmig in gmig %}
+			{% if forloop.counter0 == 0 %}
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="mod-content">
+					<a href="/great-moments-in-gaming/{{gmig.slug}}">
+						<div class="content" style="background-image:url(media/{{gmig.cover}});">
+							<header class="content-info">
+								<span>
+									<h4>{{gmig.title}}</h4>
+								</span>
+							</header>
+							<span class="overlay"></span>
+						</div>
+					</a>
+				</div>
+			</div>			
+			{% else %}
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="mod-content">
+					<a href="/great-moments-in-gaming/{{gmig.slug}}">
+						<div class="content" style="background-image:url(media/{{gmig.cover}});">
+							<header class="content-info">
+								<span>
+									<h4>{{gmig.title}}</h4>
+								</span>
+							</header>
+							<span class="overlay"></span>
+						</div>
+					</a>
+				</div>
+			</div>	
+			{% endif %}
+			{% endfor %}					
+		</div>
+		
+		{% comment %}
+		<div class="row">
+		  <div class="col-lg-12">
+		    <h3>Blind Buy</h3>
+		    <h4>{{blindbuy.title}}</h4>
+		  </div>	
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="hp-vid-wrap">
+          {{blindbuy.video|safe}}
+		    </div>
+			</div>		
+		</div>
+		{% endcomment %}
+	</div>
+</section>
+
+{% comment %}
+<section id="why-blh" class="">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<header>
+					<h2>The Dawn of a new network</h2>
+					<h3>A big, glorious dawn</h3>
+					<p>Average guys making content for like-minded souls. What more could you ask for. <a href="/accounts/login/">Join us</a> in building a new content network</p>
+				</header>
+			</div>
+			
+			<div class="col-lg-4">
+				<div class="why-col-wrap">
+					<div class="icon-wrap">
+						<span class="icon-talk"></span>
+					</div>
+					<h4>You talk.</h4>
+					<p>Visit our <a href="">forums</a>, <a href="/blog/">blog</a> or comment on any of our content and share your thoughts today!</p>
+				</div>
+			</div>
+
+			<div class="col-lg-4">
+				<div class="why-col-wrap">
+					<div class="icon-wrap">
+						<span class="icon-listen"></span>
+					</div>
+					<h4>We listen.</h4>
+					<p>We want to talk about what you want to hear about. Participate, then listen for your topics and opinions on <a href="/the-broadcast/">The BroadCast</a>!</p>
+				</div>
+			</div>
+
+			<div class="col-lg-4">
+				<div class="why-col-wrap">
+					<div class="icon-wrap">
+						<span class="icon-mic1"></span>
+					</div>
+					<h4>We talk.</h4>
+					<p>Our network of podcast will pull topics from the BLH Community. We only want to talk about what;s important to you.</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+{% endcomment %}
+<section id="hp-staff" class="">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<header>
+					<h2>Meet the corp.</h2>
+					<h3>We push the buttons and bleep the bloops.</h3>
+					<small class="white">Illustrations by <a class="white" href="http://www.brewtoons.com/wordpress/" target="_blank">Aaron Brewer</a></small>
+				</header>
+			</div>
+			
+			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+				<div class="hp-staff-wrap">
+					<span class="justin-icon"></span>
+					<h5>JUSTIN</h5>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+				<div class="hp-staff-wrap">
+					<span class="adam-icon"></span>
+					<h5>ADAM</h5>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+				<div class="hp-staff-wrap">
+					<span class="carl-icon"></span>
+					<h5>CARL</h5>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+				<div class="hp-staff-wrap">
+					<span class="sean-icon"></span>
+					<h5>SEAN</h5>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-12 col-xs-12">
+				<div class="hp-staff-wrap">
+					<span class="darren-icon"></span>
+					<h5>DARREN</h5>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+				<div class="hp-staff-wrap">
+					<span class="aaron-icon"></span>
+					<h5>AARON</h5>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+{% endblock content %}
+
+{# block content #}
+<div id="homepage">
+	
+	<section class="wrapper">
+		<div class="container">
+
+			<div class="row hp-carousel">
+				<div id="myCarousel" class="col-lg- carousel slide">
+					<div class="carousel-inner">
+						{% for bc in bclist %}
+						<div class="{% if forloop.counter0 == 0 %}active {% endif %}item">
+							<a href="/the-broadcast/{{bc.slug}}"><div class="episodeCount"><h2>EPISODE {{bc.episode}}</h2></div><img src="/media/{{bc.cover}}" alt="{{bc.title}}" /></a>
+
+						</div>
+						
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col-lg-2 carousel-nav">
+					<a class="carousel-nav-left left" href="#myCarousel" data-slide="prev">&#9001;</a>
+					<a class="carousel-nav-right right" href="#myCarousel" data-slide="next">&#9002;</a>
+				</div>
+
+			</div>
+			<hr>
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<h2>Great moments in gaming</h2><h3><a href="/great-moments-in-gaming/{{gmig.slug}}">{{gmig.title}}</a></h3>
+					<a href="/great-moments-in-gaming/{{gmig.slug}}">
+						<div class="cover">
+							{%if gmig.cover%}
+							<img src="/media/{{gmig.cover}}" alt="{{gmig.title}}" />
+							{%else%}
+							<img src="/media/{{ gmig.game.cover}}" alt="{{gmig.game.title}}" />
+							{%endif%}
+						</div>
+					</a>
+					{{gmig.content|truncatewords:40|safe}}
+				</div>	
+			</div>
+			
+			<hr>
+			
+			<div class="row">
+				<div class="hp-reviews">
+					<div class="col-lg-12">
+						<h2>RECENT REVIEWS</h2>
+					</div>
+					<ul class="recent-reviews">
+						{% for r in reviews %}
+							<li class="col-lg-4"><a href="/games/{{ r.game.slug }}"><img src="/media/{{r.game.cover}}" alt="{{r.title}}"><br>{{r.title}}</a></li>
+						{% endfor %}
+					</ul>
+					
+					<!-- <a href="/reviews/">&#187; See more reviews</a> -->
+				</div>
+			</div>			
+
+			<hr>
+			<div class="row hp-bb">
+				<div class="col-lg-4">
+					<div class="bb-title"></div>
+					<p>Blind Buy is the video series that follows Adam's quest to play games he knows nothing about. It's a strange quest, but he does it for you.</p>
+				</div>
+				
+				<div class="col-lg-5">
+					<img src="/media/{{blindbuy.game.cover}}" alt="{{blindbuy.title}}">
+				</div>
+				
+				<div class="col-lg-3">
+					<a href="/blind-buy/{{blindbuy.slug}}"><h3>{{blindbuy.title}}</h3></a>
+					{{blindbuy.content|safe|truncatewords:15}}
+				</div>
+
+			</div>
+			
+						
+		</div> 
+	</section>
+	<section class="wrapper white-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2>Games</h2>
+				</div>
+				
+				<div class="col-lg-8">
+					<div class="row">
+						<div class="hp-games">
+							{% for game in games %}
+							<div class="col-lg-4">
+								<div class="cover">
+								<a href="/games/{{game.slug}}">
+									{%if game.cover%}
+									<img src="/media/{{game.cover}}" alt="{{game.title}}" />
+									{%else%}
+									<img src="{{STATIC_URL}}img/sample.png" alt="Big Large Huge" width="940" height="420" />
+									{%endif%}
+								</a>
+								</div>
+								<h2>{{game.title}}</h2>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-4">
+					<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/biglargehuge"  data-widget-id="344479213933453313">Tweets by @biglargehuge</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+
+
+
+
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-5">
+						<br>
+						<a href="/games/" class="cta">More games</a>
+					</div>
+				</div>
+		</div>
+	</section>
+	
+</div>
+{# endblock #}
+
+{% block endjs %}
+	<script type="text/javascript">
+	    $(document).ready(function(){
+		    $('.carousel').carousel({
+			    interval: 10000
+	    	});
+	    });
+	</script>
+{% endblock %}

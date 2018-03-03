@@ -1,0 +1,33 @@
+{% extends "header.html" %}
+{% block headtitle %}BIG LARGE HUGE: Contact{% endblock %}
+{% load static from staticfiles %}
+{% block page-styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static "css/contact.less" %}">
+{% endblock %}
+{% block content %}
+<div id="contact">
+	<section class="wrapper white-bg">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h2 class="section-title">CONTACT US</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span8">
+					<form action="." method="POST">
+						{% csrf_token %}
+						{{ form.as_p }}
+					<input type="submit" value="Submit" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "article.html" %}
+{% block headtitle %}Podcast: The BroadCast Episode {{cast.episode}}{% endblock %}
+{% load disqus_tags %}
+
+{% block lead_img_src %}/media/{{ cast.cover }}{% endblock %}
+{% block lead_img_alt %}The BroadCast Episode {{ cast.episode }}{% endblock %}
+{% block category_title %}Podcasts{% endblock %}
+{% block content_title %}THE BROADCAST: EPISODE {{cast.episode}}{% endblock %}
+{% block date_tag %}{{ cast.date }}{% endblock %}
+{% block detail-content %}
+<div class="cast-masthead">
+	<audio src="/media/{{cast.podcast}}" preload="auto"></audio>
+	<a class="btn btn-info" href="/media/{{ cast.podcast }}">Download Episode {{cast.episode}}</a>
+</div>
+{{cast.content|safe}}
+{% endblock %}
+
+{% block new_bootstrap_row %}
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="broadcasting-today">
+			<h2 class="section-title">On the cast</h2>
+			<div class="crew">
+			{% for crew in cast.crew.all %}
+				<div class="{{ crew.slug }}"></div>
+			{% empty %}
+				<div class="group-lockup"></div>
+			{% endfor%}
+			</div>
+		</div>
+	</div>
+</div>
+<hr>
+<div class="row">
+	<div class="span12">
+		{% disqus_show_comments %}
+	</div>
+</div>
+{% endblock %}
+
+
+
+{% comment %}
+<div id="the-broadcast">
+	<section class="heroWrapper">
+		<h1 class="title">THE BROADCAST: EPISODE {{cast.episode}}</h1>
+		<div class="overlay"></div>
+		<div class="heroImg">
+			<img src="/media/{{ cast.cover }}" alt="{{cast.title}}">
+		</div>
+	</section>
+	<section class="wrapper">
+		<div class="container">
+			<div class="row">				
+				<div class="span12">
+					<div class="castMasthead">
+						<audio src="/media/{{cast.podcast}}" preload="auto"></audio>
+						<a class="btn btn-info" href="/media/{{ cast.podcast }}">Download Episode {{cast.episode}}</a>
+					
+						{% include "share.html" %}
+					</div>
+				</div>
+				
+				<div class="span12">
+					<div class="contentContain">
+						{{cast.content|safe}}
+					</div>	
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="span12 broadcasting-today">
+					<h2 class="section-title">Broadcasting today</h2>
+					<div class="crew">
+					{% for crew in cast.crew.all %}
+						<div class="{{ crew.slug }}"></div>
+					{% empty %}
+						<div class="group-lockup"></div>
+	
+					{% endfor%}
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="span12">
+					{% disqus_show_comments %}
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{% endcomment %}

@@ -1,0 +1,61 @@
+{% extends "header.html" %}
+{% block headtitle %}BIG LARGE HUGE: {{game.title}}{% endblock %}
+{% load static from staticfiles %}
+{% load disqus_tags %}
+{% block page-styles %}
+	<link rel="stylesheet/less" type="text/css" href="{% static "css/games.less" %}">
+{% endblock %}
+{% block content %}
+<div id="games">
+	<section class="heroWrapper">
+		<h1 class="title">{{ game.title|safe }}</h1>
+		<div class="overlay"></div>
+		<div class="heroImg">
+			<img src="/media/{{ game.cover }}"  alt="{{games.title}}" />
+		</div>
+	</section>
+	<section class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<ul class="unstyled inline">
+					{# for platform in game.platform.all #}
+<!-- 						<li><a href="" class="minor-btn games">{{platform.title}}</a></li> -->
+					{# endfor #}
+					</ul>
+					{% include "share.html" %}
+				</div>
+				<div class="span7 game-content">
+						<p>{{ game.content|safe }}</p>
+				</div>
+				
+				<div class="span5">
+					{% for review in game.review_set.all%}
+						<ul class="review unstyled {{review.verdict.slug}}">
+							<li class="review-title"><h4>{{review.title}}</h4></li>
+							<li class="review-img-wrap"><img src="/media/{{review.game.cover}}" class="review-img" alt="{{review.game.title}}"></li>
+							<li class="review-breakdown"><h5>&#8220;{{review.breakdown|safe}}&#8221;</h5></li>
+							<li class="review-verdict-{{review.verdict.slug}}">
+								<ul class="unstyled inline">
+									<li><span></span></li>
+									<li><b class="verdict">{{review.verdict}}</b></li>
+								</ul>
+							</li>
+						</ul>
+					{% empty %}
+						<div class="well">
+							<h4>No review yet. Coming soooooooon.</h4>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="span12">
+					{% disqus_show_comments %}
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{% endblock %}
