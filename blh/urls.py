@@ -1,6 +1,18 @@
+from __future__ import absolute_import, print_function, unicode_literals
+# from django.conf import settings
+# from django.conf.urls import patterns, include, url
+
+from cms.sitemaps import CMSSitemap
 from django.conf import settings
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+# from django.contrib.sitemaps.views import sitemap
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.static import serve
+
+
+# from django.contrib import admin
 from django.views.generic import ListView, DetailView
 from blh.thebroadcast.views import *
 from blh.thebroadcast.models import *
@@ -13,44 +25,51 @@ from blh.gameify.views import gameify, gameify_details
 from blh.gameify.models import Gameify, Season
 from blh.greatmoments.models import Gmig
 from blh.greatmoments.views import GreatMomentsList, gmig_details
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+# from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from blh.thebroadcast.feeds import BroadcastFeed
-from django.contrib.sitemaps import Sitemap, FlatPageSitemap, GenericSitemap
 from blh.sitemap.models import CastSitemap, BlindbuySitemap, GamesSitemap, GmigSitemap
 admin.autodiscover()
 
-sitemaps = {
-  # 'broadcast': GenericSitemap(info_dict, priority=0.6),
-  'flatpages': FlatPageSitemap,
-  'site': Sitemap,
-  'broadcast': CastSitemap,
-#   'feature': FeatureSitemap,
-  'bb': BlindbuySitemap,
-  'games':GamesSitemap,
-  'gmig':GmigSitemap,
-}
-
 #	System URLS
-urlpatterns = patterns('',
-		url(r'^grappelli/', include('grappelli.urls')),
+urlpatterns = [
+    # url(r'^sitemap\.xml$', sitemap,
+        # {'sitemaps': {'cmspages': CMSSitemap}}),
+]
+
+urlpatterns += i18n_patterns(
+    url(r'^admin/', include(admin.site.urls)),  # NOQA
+    url(r'^', include('cms.urls')),
+)
+
+# This is only needed when using runserver.
+if settings.DEBUG:
+    urlpatterns = [
+        url(r'^media/(?P<path>.*)$', serve,
+            {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+        ] + staticfiles_urlpatterns() + urlpatterns
+
+
+urlpatterns = ('',
+		# url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps})
+    # url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps})
 )
-urlpatterns += patterns('',
-    url(r'uploader/', include('chunked_uploads.urls')),
-)
+# urlpatterns += ('',
+#     url(r'uploader/', include('chunked_uploads.urls')),
+# )
 
 #	Home url
-urlpatterns += patterns('blh.home.views',
-	url(r'^$', 'home', name='home'),
-	url(r'^accounts/', include('allauth.urls')),
+urlpatterns += ('blh.home.views',
+	url(r'^$', include('blh.home')),
+	# url(r'^accounts/', include('allauth.urls')),
 )
 
 
 
 #	Broadcast URL
-urlpatterns += patterns('blh.thebroadcast.views',
+urlpatterns += i18n_patterns(
+# urlpatterns += patterns('blh.thebroadcast.views',
     url(r'^the-broadcast/$', 'cast', name='broadcast-list'),
     url(r'^the-broadcast/(?P<castslug>.*)/$', 'cast_details', name='broadcast-details'),
 )
@@ -101,10 +120,10 @@ urlpatterns += patterns('',
 )
 
 #	Media URL
-if settings.DEBUG:
-	urlpatterns += patterns('',
-		url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-	)
+# if settings.DEBUG:
+# 	urlpatterns += patterns('',
+# 		url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+# 	)
 
-urlpatterns += staticfiles_urlpatterns()
+# urlpatterns += staticfiles_urlpatterns()
 	

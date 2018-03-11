@@ -3,9 +3,7 @@ from datetime import datetime
 from blh.games.models import Games
 from blh.about.models import Staff
 from django.contrib.auth.models import User
-from tinymce.models import HTMLField
 from django.core.urlresolvers import reverse
-from chunked_uploads.fields import ChunkedFileField
 
 class Broadcast(models.Model):
 	author = models.ForeignKey(User)
@@ -13,9 +11,9 @@ class Broadcast(models.Model):
 	slug = models.SlugField(unique=True)
 	episode = models.PositiveIntegerField()
 	date = models.DateField()
-	podcast = ChunkedFileField(blank=True)
+	podcast = models.FileField(blank=True)
   	crew = models.ManyToManyField(Staff)
-	content = HTMLField()
+	content = models.CharField(max_length=255)
 	excerpt = models.TextField(blank=True)
 	gaming = models.ManyToManyField(Games, blank=True)
 	cover = models.ImageField(upload_to='./the-broadcast/featured-img/%Y/%m/%d/', blank=True)

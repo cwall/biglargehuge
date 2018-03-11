@@ -1,21 +1,17 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
-from tinymce.models import HTMLField
 from django.core.urlresolvers import reverse
-from chunked_uploads.fields import ChunkedFileField
-from django.contrib.contenttypes import generic
-from chunked_uploads.fields import ChunkedFileField
-from taggit.managers import TaggableManager
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 class Topic(models.Model):
 	title = models.CharField(max_length=250)
-	overview = HTMLField(blank=True)
+	overview = models.CharField(max_length=500, blank=True)
 	cover = models.ImageField(upload_to='./topics/', blank=True)
 	date = models.DateField()
 	updated = models.DateTimeField(auto_now=True)
 	slug = models.SlugField(unique=True)
-	extra_info = HTMLField(blank=True)
+	extra_info = models.CharField(max_length=500, blank=True)
 	
 	class Meta:
 		ordering = ['-updated']
@@ -52,15 +48,15 @@ class Feature(models.Model):
 	category = models.ForeignKey(Category)
 	title = models.CharField(max_length=250)
 	subhead = models.CharField(max_length=250, blank=True)
-	body = HTMLField()	
+	body = models.CharField(max_length=500, )	
 	date = models.DateField()
 	date_updated = models.DateTimeField(auto_now=True)
 	cover = models.ImageField(upload_to='./features/%Y/%m/%d/', blank=True)
 		
 	#Audio/Podcast fields
-	audio_file = ChunkedFileField(blank=True)
-	audio_description = HTMLField(blank=True)
-	attachment = ChunkedFileField(blank=True)
+	audio_file = models.FileField(blank=True)
+	audio_description = models.CharField(max_length=500, blank=True)
+	attachment = models.FileField(blank=True)
 	
 	#Review field
 	verdict = models.TextField(blank=True)
@@ -78,7 +74,6 @@ class Feature(models.Model):
 	
 	#Sorting fields
 	featured = models.BooleanField()
-	tags = TaggableManager(blank=True)	
 	publish = models.BooleanField()
 	slug = models.SlugField(unique=True)
 	
@@ -102,7 +97,7 @@ class Feature(models.Model):
 
 class Content(models.Model):
 	header = models.CharField(max_length=200, blank=True)
-	body = HTMLField(blank=True)
+	body = models.CharField(max_length=500, blank=True)
 	image = models.ImageField(upload_to='./features/%Y/%m/%d/', blank=True)
 	content_class = models.SlugField(unique=True, blank=True, null=True)
 	feature = models.ForeignKey(Feature)

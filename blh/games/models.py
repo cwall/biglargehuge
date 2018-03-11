@@ -1,6 +1,5 @@
 from django.db import models
 from datetime import datetime
-from tinymce.models import HTMLField
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
@@ -20,7 +19,7 @@ class Games(models.Model):
 	slug = models.SlugField(unique=True)
 	cover = models.ImageField(upload_to='./games/covers/', blank=True)
 	platform = models.ManyToManyField(Platform)
-	content = HTMLField(blank=True)
+	content = models.CharField(max_length=500, blank=True)
 	publish = models.BooleanField()
 	
 	class Meta:
@@ -54,7 +53,7 @@ class Review(models.Model):
 	slug = models.SlugField(unique=True)
 	author = models.ForeignKey(User)
 	date = models.DateTimeField(auto_now=True)
-	content = HTMLField(blank=True)
+	content = models.CharField(max_length=255, blank=True)
 	breakdown = models.CharField(max_length=250, help_text='Your final thoughts on the game')
 	verdict = models.ForeignKey(Verdict, blank=True)
 	publish = models.BooleanField()

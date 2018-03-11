@@ -19,7 +19,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3',
+        # 'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'blh_db',                      # Or path to database file if using sqlite3.
         'USER': 'biglargehuge',                      # Not used with sqlite3.
         'PASSWORD': 'Tamberinemage56',                  # Not used with sqlite3.
@@ -156,6 +157,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'menus',  # helper for model independent hierarchical website navigation
+    'sekizai', 
     #'grappelli',
     'django.contrib.admin',
     #'django.contrib.comments',
@@ -171,7 +174,7 @@ INSTALLED_APPS = (
     'blh.features',
     'blh.sitemap',
     'blh.contact',
-    'chunked_uploads',
+    # 'chunked_uploads',
     #'south',
     #'disqus',
     'django.contrib.flatpages',

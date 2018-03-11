@@ -1,10 +1,9 @@
 from django.db import models
-from tinymce.models import HTMLField
 
 class Staff(models.Model):
 	name = models.CharField(max_length=200)
 	title = models.CharField(max_length=200, blank=True)
-	bio = HTMLField(blank=True)
+	bio = models.CharField(max_length=255, blank=True)
 	avatar = models.ImageField(upload_to='./staff/', blank=True)
 	url = models.URLField(blank=True)
 	twitter = models.CharField(max_length=250, blank=True)
@@ -21,7 +20,7 @@ class Staff(models.Model):
 
 class About(models.Model):
 	title = models.CharField(max_length=255)
-	body = HTMLField()
+	body = models.CharField(max_length=500)
 	
 	def __unicode__(self):
 		return self.title

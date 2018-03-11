@@ -2,7 +2,7 @@ from django.db import models
 from datetime import datetime
 from blh.games.models import Games
 from django.contrib.auth.models import User
-from tinymce.models import HTMLField
+# from tinymce.models import HTMLField
 from django.core.urlresolvers import reverse
 
 class Blindbuy(models.Model):
@@ -13,7 +13,7 @@ class Blindbuy(models.Model):
 	episode = models.PositiveIntegerField()
 	video = models.CharField(max_length=500)
 	game = models.ForeignKey(Games, related_name='blindbuys', blank=True)
-	content = HTMLField(blank=True)
+	content = models.CharField(max_length=500, blank=True)
 	publish = models.BooleanField()
 	
 	class Meta:

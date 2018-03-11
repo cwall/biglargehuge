@@ -2,7 +2,6 @@ from django.db import models
 from blh.games.models import Games
 from datetime import datetime
 from django.contrib.auth.models import User
-from tinymce.models import HTMLField
 from django.core.urlresolvers import reverse
 
 class Gmig(models.Model):
@@ -13,7 +12,7 @@ class Gmig(models.Model):
 	author = models.ForeignKey(User)
 	cover = models.ImageField(upload_to='./gmig/banners/', blank=True)
 	video = models.CharField(max_length=600, blank=True,)
-	content = HTMLField()
+	content = models.CharField(max_length=500)
 	publish = models.BooleanField()
 	
 	class Meta:
